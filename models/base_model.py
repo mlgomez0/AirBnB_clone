@@ -9,13 +9,20 @@ class BaseModel():
     """ BaseModel that defines all common attributes/methods for other classes
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """ Constructor of class BaseModel
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
-        
+        if kwargs:
+            for k, v in kwargs.items():
+                if k is not '__class__':
+                    if k is 'created_at' or k is 'updated_at':
+                        v = datetime.datetime.strptime(v, '%Y-%m-%dT%H:%M:%S.%f')
+                    setattr(self, k, v)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.datetime.now()
+            self.updated_at = datetime.datetime.now()
+
     def __str__(self):
         """ Overrides the str magic method
         """
@@ -31,11 +38,11 @@ class BaseModel():
         """ Returns a dictionary containing all keys/values of __dict__ of the instance
         """
         a_dict = self.__dict__
-        a_dict.update(__class__ = 'BaseModel')
+        a_dict['__class__'] = self.__class__.__name__
         a_dict['created_at'] = a_dict['created_at'].isoformat(sep='T')
         a_dict['updated_at'] = a_dict['updated_at'].isoformat(sep='T')
         return a_dict
 
 
 
-    
+

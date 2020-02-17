@@ -7,7 +7,9 @@ import models
 from models import storage
 from cmd import Cmd
 from models.base_model import BaseModel
+from models.user import User
 from models.engine.file_storage import FileStorage
+
 
 class HBNBCommand(Cmd):
     """ Class to create the command line interpreter
@@ -20,10 +22,10 @@ class HBNBCommand(Cmd):
         """
         if inp == "":
             print("** class name missing **")
-        elif inp != "BaseModel":
+        elif inp.split(' ')[0] not in globals().keys():
             print("** class doesn't exist **")
         else:
-            new_obj = BaseModel()
+            new_obj = globals()[inp]()
             new_obj.save()
             print(new_obj.id)
 
@@ -35,7 +37,7 @@ class HBNBCommand(Cmd):
         list_args = inp.split(' ')
         if list_args[0] == "":
             print("** class name missing **")
-        elif list_args[0] != "BaseModel":
+        elif list_args[0] not in globals().keys():
             print("** class doesn't exist **")
         elif len(list_args) <= 1:
             print("** instance id missing **")
@@ -57,7 +59,7 @@ class HBNBCommand(Cmd):
         list_args = inp.split(' ')
         if list_args[0] == "":
             print("** class name missing **")
-        elif list_args[0] != "BaseModel":
+        elif list_args[0] not in globals().keys():
             print("** class doesn't exist **")
         elif len(list_args) <= 1:
             print("** instance id missing **")
@@ -77,24 +79,29 @@ class HBNBCommand(Cmd):
         """Prints all string representation of all
            instances based or not on the class name.
         """
-        my_list=[]
-        if inp != "" and inp != "BaseModel":
+
+        my_list = []
+        if inp != "" and inp.split(' ')[0] not in globals().keys():
             print("** class doesn't exist **")
         else:
             all_objs = storage.all()
             for k, v in all_objs.items():
-                my_list.append(v.__str__())
+                if inp == "":
+                    my_list.append(v.__str__())
+                elif k.split('.')[0] == inp.split(' ')[0]:
+                    my_list.append(v.__str__())
             print(my_list)
 
     def do_update(self, inp):
         """Updates an instance based on the class name and id by
            adding or updating attribute
         """
-       	flag = 0
+
+        flag = 0
         list_args = inp.split(' ')
         if list_args[0] == "":
             print("** class name missing **")
-        elif list_args[0] != "BaseModel":
+        elif list_args[0] not in globals().keys():
             print("** class doesn't exist **")
         elif len(list_args) == 1:
             print("** instance id missing **")
@@ -129,7 +136,7 @@ class HBNBCommand(Cmd):
         print('Quit command to exit the program')
 
     def emptyline(self):
-         pass
+        pass
 
     do_EOF = do_quit
     help_EOF = help_quit

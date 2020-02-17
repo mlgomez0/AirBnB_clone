@@ -2,10 +2,12 @@
 """ This module contains class FileStorage
 """
 
-
 import json
 import os
 from models.base_model import BaseModel
+from models.user import User
+
+
 class FileStorage():
     """ Serializes instances to a JSON file and deserializes JSON file to instances
     """
@@ -33,7 +35,7 @@ class FileStorage():
         """ serializes __objects to the JSON file (path: __file_path)
         """
         my_dict = {}
-        for k,v in FileStorage.__objects.items():
+        for k, v in FileStorage.__objects.items():
             my_dict[k] = v.to_dict()
         str_json = json.dumps(my_dict)
         with open(FileStorage.__file_path, "w", encoding='utf-8') as my_file:
@@ -45,11 +47,8 @@ class FileStorage():
             If the file doesn’t exist, no exception should be raised)
         """
         if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, 'r', encoding='utf-8') as my_file:
-                str_read = my_file.read()
+            with open(FileStorage.__file_path, 'r', encoding='utf-8') as my_f:
+                str_read = my_f.read()
             my_obj = json.loads(str_read)
             for k, v in my_obj.items():
-                FileStorage.__objects[k] = BaseModel(**v)
-
-
-
+                FileStorage.__objects[k] = globals()[k.split('.')[0]](**v)

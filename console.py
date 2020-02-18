@@ -120,8 +120,8 @@ class HBNBCommand(Cmd):
                         letters_count += 1
             all_objs = storage.all()
             for k, v in all_objs.items():
-                splitted = k.split('.')[1]
-                if splitted == list_args[1]:
+                splitted = k.split('.')
+                if splitted[1] == list_args[1] and list_args[0] == splitted[0]:
                     flag = 1
                     if len(list_args) == 2:
                         print("** attribute name missing **")

@@ -50,8 +50,8 @@ class HBNBCommand(Cmd):
         else:
             all_objs = storage.all()
             for k, v in all_objs.items():
-                splitted = k.split('.')[1]
-                if splitted == list_args[1]:
+                splitted = k.split('.')
+                if splitted[1] == list_args[1] and list_args[0] == splitted[0]:
                     print(v)
                     flag = 1
             if flag == 0:
@@ -72,8 +72,8 @@ class HBNBCommand(Cmd):
         else:
             all_objs = storage.all()
             for k, v in all_objs.items():
-                splitted = k.split('.')[1]
-                if splitted == list_args[1]:
+                splitted = k.split('.')
+                if splitted[1] == list_args[1] and list_args[0] == splitted[0]:
                     del all_objs[k]
                     flag = 1
                     storage.save()

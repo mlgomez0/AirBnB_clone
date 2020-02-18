@@ -10,6 +10,7 @@ from models.amenity import Amenity
 from models.state import State
 from models.review import Review
 
+
 def test_pep8_conformance_base_model(self):
     	"""Test that we conform to PEP8."""
     	pep8style = pep8.StyleGuide(quiet=True)
@@ -19,7 +20,6 @@ def test_pep8_conformance_base_model(self):
 
 
 class Testbasemodel(unittest.TestCase):
-	
 
 	def test_creation_from_dictionary_basic(self):
     	""" This function proves in a basic way that when instantiating\

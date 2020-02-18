@@ -132,9 +132,9 @@ class HBNBCommand(Cmd):
                     else:
                         if (list_args[3].isdigit()):
                             setattr(v, list_args[2], int(list_args[3]))
-                        elif (list_args[3].isalpha() is False
-                                and list_args[3].count('.') == 1
-                                and letters_count == 0):
+                        elif (list_args[3].isalpha() is False and
+                                list_args[3].count('.') == 1 and
+                                letters_count == 0):
                             setattr(v, list_args[2], float(list_args[3]))
                         else:
                             setattr(v, list_args[2], list_args[3])

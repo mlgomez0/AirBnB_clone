@@ -96,7 +96,8 @@ class HBNBCommand(Cmd):
                     my_list.append(v.__str__())
                 elif k.split('.')[0] == inp.split(' ')[0]:
                     my_list.append(v.__str__())
-            print(my_list)
+            if len(my_list) > 0:
+                print(my_list)
 
     def do_update(self, inp):
         """Updates an instance based on the class name and id by

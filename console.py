@@ -113,30 +113,33 @@ class HBNBCommand(Cmd):
             print("** class doesn't exist **")
         elif len(list_args) == 1:
             print("** instance id missing **")
-        elif len(list_args) == 2:
-            print("** attribute name missing **")
-        elif len(list_args) <= 3:
-            print("** value missing **")
         else:
+            if len(list_args) >= 4:
+                for i in list_args[3]:
+                    if i.isalpha():
+                        letters_count += 1
             all_objs = storage.all()
-            for i in list_args[3]:
-                if i.isalpha():
-                    letters_count += 1
             for k, v in all_objs.items():
                 splitted = k.split('.')[1]
                 if splitted == list_args[1]:
                     flag = 1
-                    if (list_args[3].isdigit()):
-                        setattr(v, list_args[2], int(list_args[3]))
-                    elif (list_args[3].isalpha() is False
-                          and list_args[3].count('.') == 1
-                          and letters_count == 0):
-                        setattr(v, list_args[2], float(list_args[3]))
+                    if len(list_args) == 2:
+                        print("** attribute name missing **")
+                        break
+                    elif len(list_args) <= 3:
+                        print("** value missing **")
+                        break
                     else:
-                        setattr(v, list_args[2], list_args[3])
-                    storage.save()
-                    break
-
+                        if (list_args[3].isdigit()):
+                            setattr(v, list_args[2], int(list_args[3]))
+                        elif (list_args[3].isalpha() is False
+                                and list_args[3].count('.') == 1
+                                and letters_count == 0):
+                            setattr(v, list_args[2], float(list_args[3]))
+                        else:
+                            setattr(v, list_args[2], list_args[3])
+                        storage.save()
+                        break
             if flag == 0:
                 print("** no instance found **")
 

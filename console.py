@@ -8,7 +8,13 @@ from models import storage
 from cmd import Cmd
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models.engine.file_storage import FileStorage
+import shlex
 
 
 class HBNBCommand(Cmd):
@@ -17,8 +23,8 @@ class HBNBCommand(Cmd):
     prompt = '(hbnb) '
 
     def do_create(self, inp):
-        """ Creates a new instance of BaseModel, saves it (to the JSON file) and
-            prints the id. Ex: $ create BaseModel
+        """ Creates a new instance of BaseModel, saves it (to the JSON file)
+            and prints the id. Ex: $ create BaseModel
         """
         if inp == "":
             print("** class name missing **")
@@ -98,7 +104,8 @@ class HBNBCommand(Cmd):
         """
 
         flag = 0
-        list_args = inp.split(' ')
+        letters_count = 0
+        list_args = shlex.split(inp)
         if list_args[0] == "":
             print("** class name missing **")
         elif list_args[0] not in globals().keys():
@@ -111,18 +118,24 @@ class HBNBCommand(Cmd):
             print("** value missing **")
         else:
             all_objs = storage.all()
+            for i in list_args[3]:
+                if i.isalpha():
+                    letters_count += 1
             for k, v in all_objs.items():
                 splitted = k.split('.')[1]
                 if splitted == list_args[1]:
                     flag = 1
-                    if (type(literal_eval(list_args[3]))) == int:
+                    if (list_args[3].isdigit()):
                         setattr(v, list_args[2], int(list_args[3]))
-                    elif (type(literal_eval(list_args[3]))) == float:
+                    elif (list_args[3].isalpha() is False
+                          and list_args[3].count('.') == 1
+                          and letters_count == 0):
                         setattr(v, list_args[2], float(list_args[3]))
                     else:
-                        setattr(v, list_args[2], list_args[3][1:-1])
+                        setattr(v, list_args[2], list_args[3])
                     storage.save()
                     break
+
             if flag == 0:
                 print("** no instance found **")
 
@@ -140,6 +153,7 @@ class HBNBCommand(Cmd):
 
     do_EOF = do_quit
     help_EOF = help_quit
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

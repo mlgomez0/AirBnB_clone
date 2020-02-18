@@ -1,12 +1,8 @@
 #!/usr/bin/python3
 """test for file storage"""
-
-
 import unittest
 import pep8
 import json
-import uuid
-from datetime import datetime
 import os
 from models.base_model import BaseModel
 from models.user import User
@@ -101,7 +97,7 @@ class TestFileStorage(unittest.TestCase):
             lines = f.readlines()
         try:
             os.remove(path)
-        except BaseException:
+        except:
             pass
         self.storage.save()
         with open(path, 'r') as f:
@@ -109,7 +105,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(lines, lines2)
         try:
             os.remove(path)
-        except BaseException:
+        except:
             pass
         with open(path, "w") as f:
             f.write("{}")

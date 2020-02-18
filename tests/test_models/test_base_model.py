@@ -1,9 +1,16 @@
 #!/usr/bin/python3
 """test for the BaseModel class"""
 import unittest
+from datetime import datetime
+import uuid
 import os
 from models.base_model import BaseModel
 import pep8
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.state import State
+from models.review import Review
 
 
 class TestBaseModel(unittest.TestCase):
@@ -51,7 +58,7 @@ class TestBaseModel(unittest.TestCase):
         """test if the base is an instance of type BaseModel"""
         self.assertTrue(isinstance(self.base, BaseModel))
 
-    def test_save_BaseModel(self):
+    def test_save_BaesModel(self):
         """test if the save method works"""
         self.base.save()
         self.assertNotEqual(self.base.created_at, self.base.updated_at)
@@ -63,6 +70,5 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(base_dict['created_at'], str)
         self.assertIsInstance(base_dict['updated_at'], str)
 
-
-if __name__ == "__main__":
-    unittest.main()
+    if __name__ == "__main__":
+        unittest.main()

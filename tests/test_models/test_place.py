@@ -20,12 +20,12 @@ class Testplace(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
-        def test_class(self):
+    def test_class(self):
         """ creates a place instance"""
         place1 = Place()
         self.assertEqual(place1.__class__.__name__, "Place")
 
-        def test_father(self):
+    def test_father(self):
         """ checks if subclass"""
         place1 = Place()
         self.assertTrue(issubclass(place1.__class__, BaseModel))

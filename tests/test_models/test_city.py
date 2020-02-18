@@ -20,12 +20,12 @@ class Testcity(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
-        def test_class(self):
+    def test_class(self):
         """ creates City instance"""
         city1 = City()
         self.assertEqual(city1.__class__.__name__, "City")
 
-        def test_father(self):
+    def test_father(self):
         """ checks if subclass"""
         city1 = City()
         self.assertTrue(issubclass(city1.__class__, BaseModel))

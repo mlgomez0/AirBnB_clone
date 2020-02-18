@@ -21,11 +21,11 @@ class Testamenity(unittest.TestCase):
                          "Found code style errors (and warnings).")
 
         def test_class(self):
-        """ creates instance of amenity"""
-        amenity1 = Amenity()
-        self.assertEqual(amenity1.__class__.__name__, "Amenity")
+            """ creates instance of amenity"""
+            amenity1 = Amenity()
+            self.assertEqual(amenity1.__class__.__name__, "Amenity")
 
         def test_father(self):
-        """ tests is subclass"""
-        amenity1 = Amenity()
-        self.assertTrue(issubclass(amenity1.__class__, BaseModel))
+            """ tests is subclass"""
+            amenity1 = Amenity()
+            self.assertTrue(issubclass(amenity1.__class__, BaseModel))

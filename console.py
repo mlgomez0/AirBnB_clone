@@ -28,7 +28,7 @@ class HBNBCommand(Cmd):
         """
         if inp == "":
             print("** class name missing **")
-        elif inp.split(' ')[0] not in globals().keys():
+        elif inp not in globals().keys():
             print("** class doesn't exist **")
         else:
             new_obj = globals()[inp]()

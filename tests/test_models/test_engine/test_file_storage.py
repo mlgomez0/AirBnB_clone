@@ -25,7 +25,7 @@ class TestFileStorage(unittest.TestCase):
         cls.user.last_name = "Yo"
         cls.user.email = "1234@yahoo.com"
         cls.storage = FileStorage()
-        cls.path = "file.json"
+        cls.__file_path = "file.json"
 
     @classmethod
     def teardown(cls):

@@ -30,6 +30,17 @@ class HBNBCommand(Cmd):
         if line.count('.') == 1 and line.count(' ') == 0 and st_sliced == "()":
             splitted = line_cpy.split('.')
             return splitted[1] + ' ' + splitted[0]
+        elif line.count('.') == 1 and line.count('(') == 1 and\
+                line.count(')') == 1:
+            lne = line[:]
+            l1 = lne.split('.')
+            l2 = l1[1].split('(')
+            l2[1] = l2[1][:-1]
+            str_t = l2[0] + ' ' + l1[0] + ' '
+            l3 = l2[1].replace('"', '')
+            for i in l3.split(','):
+                str_t += i
+            return str_t
         else:
             return line
 
@@ -37,14 +48,16 @@ class HBNBCommand(Cmd):
         """ Called on an input line when command prefix is not recognized"""
         line_split = line[:]
         all_objs = storage.all()
-        split1 = line_split.split(' ')[0]
-        split2 = line_split.split(' ')[1]
-        count_objs = 0
-        if split1 == "count" and split2 in globals().keys():
-            for k, v in all_objs.items():
-                if k.split('.')[0] == split2:
-                    count_objs += 1
-            print(count_objs)
+        split = line_split.split(' ')
+        if len(split) > 1:
+            split1 = split[0]
+            split2 = split[1]
+            count_objs = 0
+            if split1 == "count" and split2 in globals().keys():
+                for k, v in all_objs.items():
+                    if k.split('.')[0] == split2:
+                        count_objs += 1
+                print(count_objs)
 
     def do_create(self, inp):
         """ Creates a new instance of BaseModel, saves it (to the JSON file)

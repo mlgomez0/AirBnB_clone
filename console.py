@@ -107,7 +107,7 @@ class HBNBCommand(Cmd):
         flag = 0
         letters_count = 0
         list_args = shlex.split(inp)
-        if list_args[0] == "":
+        if len(list_args) == 0:
             print("** class name missing **")
         elif list_args[0] not in globals().keys():
             print("** class doesn't exist **")

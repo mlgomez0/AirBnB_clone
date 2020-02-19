@@ -26,11 +26,25 @@ class HBNBCommand(Cmd):
         """ retrieve all instances of a class by using: <class name>.all()"""
         st_sliced = line[-2:]
         line_cpy = line[:-2]
+        count_objs = 0
         if line.count('.') == 1 and line.count(' ') == 0 and st_sliced == "()":
             splitted = line_cpy.split('.')
             return splitted[1] + ' ' + splitted[0]
         else:
             return line
+
+    def default(self, line):
+        """ Called on an input line when command prefix is not recognized"""
+        line_split = line[:]
+        all_objs = storage.all()
+        split1 = line_split.split(' ')[0]
+        split2 = line_split.split(' ')[1]
+        count_objs = 0
+        if split1 == "count" and split2 in globals().keys():
+            for k, v in all_objs.items():
+                if k.split('.')[0] == split2:
+                    count_objs += 1
+            print(count_objs)
 
     def do_create(self, inp):
         """ Creates a new instance of BaseModel, saves it (to the JSON file)

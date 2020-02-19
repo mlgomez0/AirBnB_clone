@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """test for the BaseModel class"""
+
 import unittest
 from datetime import datetime
 import uuid
@@ -15,6 +16,7 @@ from models.review import Review
 
 class TestBaseModel(unittest.TestCase):
     """this will test the base model class"""
+
     @classmethod
     def setUpClass(cls):
         """setup for the test"""
@@ -70,5 +72,5 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(base_dict['created_at'], str)
         self.assertIsInstance(base_dict['updated_at'], str)
 
-    if __name__ == "__main__":
-        unittest.main()
+if __name__ == "__main__":
+    unittest.main()

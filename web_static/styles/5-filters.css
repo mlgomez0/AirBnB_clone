@@ -9,22 +9,6 @@
     position: relative;
     border-style: solid;
 }
-.butt {
-    position: absolute;
-    right: 30px;
-    font-size: 18px;
-    background-color: #FF5A5F;
-    color: #ffffff;
-    height: 48px;
-    width: 20%;
-    border: 0px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.butt:hover{
-    opacity: 90%;
-}
 
 .locations {
     height: 100%;
@@ -49,4 +33,21 @@ h4 {
     font-weight: 400;
     font-size: 14px;
     margin: 0px;
+}
+
+.butt {
+    position: absolute;
+    right: 30px;
+    font-size: 18px;
+    background-color: #FF5A5F;
+    color: #ffffff;
+    height: 48px;
+    width: 20%;
+    border: 0px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.butt:hover {
+    opacity: 90%;
 }

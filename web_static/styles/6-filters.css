@@ -31,14 +31,14 @@
     width: 25%;
     margin-left: 30px;
     border-right: 1px solid #dddddd;
-    
+
 }
 
 .amenities {
     height: 100%;
     width: 25%;
     margin-left: 30px;
-    
+
 }
 
 h3 {
@@ -61,8 +61,8 @@ h4 {
     padding-top: 1%;
     margin-left: -30px;
     display: none;
- 
-                
+
+
 }
 
 .popover ul {
@@ -91,6 +91,7 @@ h4 {
     margin-bottom: 7px;
     font-size: 20px;
     margin-top: 30px;
+    font size: 16px;
 }
 
 .locations:hover .popover, .amenities:hover .popover{

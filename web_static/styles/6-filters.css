@@ -89,9 +89,8 @@ h4 {
 .popover h2 {
     margin: 0px;
     margin-bottom: 7px;
-    font-size: 20px;
+    font-size: 16px;
     margin-top: 30px;
-    font size: 16px;
 }
 
 .locations:hover .popover, .amenities:hover .popover{
